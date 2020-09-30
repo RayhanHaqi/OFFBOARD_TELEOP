@@ -49,6 +49,7 @@ void callback3(const offb::kordinat::ConstPtr& msg){
 
 int main(int argc, char **argv)
 {
+    std::cout << "JANCOK 1\n";
     ros::init(argc, argv, "offb_node");
     ros::NodeHandle nh;
 
@@ -72,8 +73,8 @@ int main(int argc, char **argv)
             ("teleop", 10, callback2);
     ros::Subscriber sub_kor = nh.subscribe<offb::kordinat>
             ("vision", 10, callback3);
-
-
+    
+    std::cout << "JANCOK 2\n";
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(32.0);
 
@@ -81,6 +82,7 @@ int main(int argc, char **argv)
     while(ros::ok() && !current_state.connected){
         ros::spinOnce();
         rate.sleep();
+        std::cout << "JANCOK 3\n";
     }
 
     geometry_msgs::PoseStamped pose;
@@ -93,12 +95,13 @@ int main(int argc, char **argv)
     cmd_msg.angular.x = 0;
     cmd_msg.angular.y = 0;
     cmd_msg.angular.z = 0;
-
+    std::cout << "JANCOK 4\n";
     //send a few setpoints before starting
     for(int i = 100; ros::ok() && i > 0; --i){
         cmd_pub.publish(cmd_msg);
         ros::spinOnce();
         rate.sleep();
+        std::cout << "JANCOK 5\n";
     }
 
     mavros_msgs::SetMode offb_set_mode;
@@ -108,6 +111,8 @@ int main(int argc, char **argv)
     arm_cmd.request.value = true;
 
     ros::Time last_request = ros::Time::now();
+    
+    std::cout << "JANCOK 6\n";
     
     int qop;
     std::cout << "Masukin angka!";
