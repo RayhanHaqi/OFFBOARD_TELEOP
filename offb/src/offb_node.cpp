@@ -152,7 +152,7 @@ int main(int argc, char **argv)
         ROS_INFO("Ketinggian = %s Teleop Key = %s", s.c_str(), ss.c_str());
         double time_now = ros::Time::now().toSec();
 
-        if (time_now - time_teleop < 0.2){
+        if (time_now - time_teleop < 0.3){
             if (gerak_posisi.count(c)){
                 cmd_msg.linear.x = gerak_posisi[c][0];
                 cmd_msg.linear.y = gerak_posisi[c][1];
